@@ -1,0 +1,59 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+char str[100];
+int MaxSize, tos;
+
+void initStack(int size){
+	MaxSize = size;
+	tos = -1;
+}
+
+void push(char c){
+	tos++;
+	str[tos] = c;
+}
+
+char pop(){
+	char c;
+	c = str[tos];
+	tos--;
+	return c;
+}
+
+int isFull(){
+	if (tos == MaxSize - 1)
+		return 1;
+	else return 0;
+}
+
+int isEmpty(){
+	if (tos == -1)
+		return 1;
+	else return 0;
+}
+
+char atTop(){
+	return str[tos];
+}
+
+void reverse(){
+	int i;
+	for (i = tos; i > -1; i--)
+		cout << str[i];
+	getchar();
+}
+
+int main(){
+	char name[] = "Hello";
+	int n = strlen(name);
+	initStack(n);
+		
+		
+	for (int i = 0; i < strlen(name); i++)
+			push(name[i]);
+	reverse();
+	return 0;
+
+}
