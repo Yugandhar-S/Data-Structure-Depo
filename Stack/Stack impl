@@ -1,0 +1,123 @@
+#include<iostream>
+using namespace std;
+
+int s[100], tos, MaxSize;
+
+void initStack(int size){
+	MaxSize = size;
+	tos = -1;
+}
+
+void push(int e){
+	//increment tos
+	tos++;
+	//accept element in stack with tos reference
+	s[tos] = e;
+}
+
+int isFull(){
+	if (tos == MaxSize - 1)
+		return 1;
+	else return 0;
+}
+
+int pop(){
+	//varaible to store the element
+	int temp;
+	//remove and store the element in temp 
+	temp = s[tos];
+	//decrement tos
+	tos--;
+	//return the popped element
+	return temp;
+}
+
+int isEmpty(){
+	if (tos == -1)
+		return 1;
+	else
+		return 0;
+}
+
+
+int atTop(){
+	//only returns the element
+	return s[tos];
+}
+
+void printStack(){
+	int i;
+
+	we need to only print the elements from
+	top to bottom using tos;
+	by using for loop, we initialise i with tos, then print the number; then decrement i upto 0
+	
+	for (i = tos; i > -1; i--)
+		cout << s[i]<<endl;
+}
+
+int main(){
+	int ch, e, size;
+	cout << "Enter Size"<<endl;
+	cin >> size;
+	initStack(size);
+	do{
+		cout << "\n1.push" <<
+			"\n2.pop" <<
+			"\n3.atTop" <<
+			"\n4.print" <<
+			"\n0.exit"<<endl;
+		cin >> ch;
+
+		switch (ch){
+		case 1:{
+			if (isFull() == 1)
+				cout << "Stack is full"<<endl;
+			else{
+				cout << "Enter number for Stack";
+				cin >> e;
+				push(e);
+			}
+			break;
+		}
+
+		  case 2:{
+			  if (isEmpty() == 1)
+				  cout << "Stack is empty";
+			  else{
+				  e = pop();
+				  cout << "poped number :" << e;
+			  }
+			  break;
+		  }
+	
+			case 3:{
+				if (isEmpty() == 1)
+					cout << "Stack is empty";
+				else{
+					e = atTop();
+					cout << "at top :" << e;
+				}break;
+			}
+
+			  case 4:{
+				  if (isEmpty() == 1)
+					  cout << "Stack is empty";
+				  else
+					  printStack();
+				  break;
+			  }
+			
+				case 0:{
+					cout << "Exiting";
+					break;
+				}
+
+		 default:{
+			cout<<"Error";
+			break;
+		}
+
+		}
+	} while (ch != 0);
+}
