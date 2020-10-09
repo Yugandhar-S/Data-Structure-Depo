@@ -1,0 +1,85 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+char str[100];
+int MaxSize, tos;
+
+void initStack(int size){
+	MaxSize = size;
+	tos = -1;
+}
+
+void push(char c){
+	tos++;
+	str[tos] = c;
+}
+
+char pop(){
+	char c;
+	c = str[tos];
+	tos--;
+	return c;
+}
+
+int isFull(){
+	if (tos == MaxSize - 1)
+		return 1;
+	else return 0;
+}
+
+int isEmpty(){
+	if (tos == -1)
+		return 1;
+	else return 0;
+}
+
+char atTop(){
+	return str[tos];
+}
+
+bool areBracketsBalanced(char expr[]){
+	char x;
+	for (int i = 0; i < MaxSize; i++)	{
+		if (expr[i] == '{'){
+			push(expr[i]);
+		}
+		
+		
+
+		if (expr[i] == '}'){
+			if (isEmpty() == 1){
+				cout << "Expected {"<<endl;
+				return false;
+			}
+			x = atTop();
+			pop();
+		}
+		
+		
+
+	}
+	if (isEmpty() == 1)
+		return true;
+	else
+	{
+		cout << "Expected }" << endl;
+		return false;
+	}
+		
+
+}
+
+int main(){
+	char expr[] = "{{{}}";
+	int n = strlen(expr);
+	initStack(n);
+	bool check=areBracketsBalanced(expr);
+	if (check)
+		cout << "Balanced" << endl;
+	else
+		cout << "Not Balanced" << endl;
+	getchar();
+	return 0;
+
+}
