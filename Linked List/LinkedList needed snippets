@@ -1,0 +1,50 @@
+
+#include<iostream>
+using namespace std;
+
+//Node stucture
+
+struct node{
+	int data;
+	struct node *next;
+};
+
+
+int main(){
+
+//to create a pointer of type node
+struct node *n, *t;
+
+//We creeate a node
+n = new node;
+node *n1 = new node;
+t = new node;
+
+//Initialise the node
+n->data = 10;
+n->next = NULL;
+
+t->data = 40;
+t->next = NULL;
+
+//to Link 'N' node with 'T' node
+n->next = t;
+
+//creating, initialising 3rd node
+node *y = new node;
+y->data = 27;
+y->next = NULL;
+
+//linking all the three node "n->t->y"
+t->next = y;
+
+//creating a ref for traversing
+node *a = new node;
+a = n;
+while (a!= NULL)
+{
+	cout << a->data << " ";
+	a->next;
+}
+
+}
