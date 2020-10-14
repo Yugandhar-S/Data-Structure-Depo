@@ -1,0 +1,109 @@
+#include<iostream> 
+#include <algorithm> 
+using namespace std;
+
+
+void printMedian(int m[][50], int row, int col)
+{
+	int min = INT_MAX, max = INT_MIN;
+
+	
+	for (int i = 0; i<row; i++)
+	{
+		/*Finding minimum element by comparing
+		from first element from each row*/
+		if (m[i][0] < min)
+			min = m[i][0];
+
+		/*
+		Finding maximum element can be found by comparing
+		the last element of each row
+		*/
+		if (m[i][col - 1] > max)
+			max = m[i][col - 1];
+	}
+
+	int median = (row * col + 1) / 2;
+
+	/*
+	Using binary search on our range of numbers from minimum to maximum
+	*/
+	while (min < max)
+	{
+
+		/*
+		To find the mid of the min and max,
+		and get count of numbers less than our mid
+		*/
+		int midpoint = min + (max - min) / 2;
+		int place = 0;
+
+		//Count of elements smaller than mid 
+		for (int i = 0; i < row; ++i)
+			place += std::upper_bound(m[i], m[i] + col, midpoint) - m[i];
+		if (place < median)
+			min = midpoint + 1;
+		else
+			max = midpoint;
+	}
+	cout<<"The Median is : "<<min;
+}
+
+
+int main()
+{
+	int r = 3, c = 3;
+	int m[][50] = { { 1, 3, 5 }, { 2, 6, 9 }, { 3, 6, 9 } };
+	printMedian(m, r, c);
+	getchar();
+	return 0;
+}
+
+
+//Swapping of Nodes program
+struct node{
+	int data;
+	struct node *next;
+};
+
+void swap(int n1, int n2){
+	struct node *Node1, *Node2, *t1, *t2, *temp;
+	t1 = t2 = root;
+
+	if (root == NULL)
+		cout << "List emmpty";
+	if (n1 == n2)
+		cout << "List remains same";
+
+	//Searching for first node w.r.t n1
+	while (t1 != NULL && t1->data != n1){
+		Node1 = t1;
+		t1 = t1->next;
+	}
+	
+	//Searching for second node w.r.t n2
+	while (t2 != NULL && t2->data != n2){
+		Node1 = t2;
+		t2 = t2->next;
+	}
+
+	if (t1 != NULL && t2 != NULL)//both node are found
+	{
+		if (Node1 != NULL)
+			Node1->next = t2;
+		else
+			root = t2;
+
+		if (Node2 != NULL)
+			Node2->next = t1;
+		else
+			root = t1;
+
+		temp = t1->next;
+		t1->next = t2->next;
+		t2->next = temp;
+	}
+	else
+		cout << "Swapping not possible";
+}
+
